@@ -1,0 +1,5 @@
+cd "C:\Users\Adwaith AS\Downloads\OnlineVoting-Django[updated]\OnlineVoting-Django"
+venv\Scripts\activate
+
+http://127.0.0.1:8000/account/
+http://127.0.0.1:8000/account/register/
