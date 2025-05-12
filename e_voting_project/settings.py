@@ -13,6 +13,14 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from dotenv import load_dotenv
+load_dotenv()
+
+DATABASES = {
+    'default': dj_database_url.config(conn_max_age=600)
+}
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,10 +37,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# For Heroku/Render static files
-if os.getenv('RENDER'):
-    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -62,9 +66,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
     'account.middleware.AccountCheckMiddleWare',
 ]
+
+# ✅ Insert WhiteNoise middleware ONLY after MIDDLEWARE is defined
+if os.getenv('RENDER'):
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
 
 ROOT_URLCONF = 'e_voting_project.urls'
 
