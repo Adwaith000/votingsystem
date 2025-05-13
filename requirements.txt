@@ -31,3 +31,5 @@ virtualenv==20.0.31
 weasyprint==62.3
 webencodings==0.5.1
 zopfli==0.2.3.post1
+# Updated for Render deployment
+
